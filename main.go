@@ -2,19 +2,21 @@ package main
 
 import (
 	"fmt"
-	fs "fs/ascii"
+	"net/http"
 	"os"
 	"strings"
+
+	fs "fs/ascii"
 )
 
-func finalPrint(text string , banner string) string {
+func finalPrint(text string, banner string) string {
 	name := ""
-		if banner == "thinkertoy" || banner == "standard" || banner == "shadow" {
-			name = banner
-		} else {
-			fmt.Println("incorrect banner")
-			return ""
-		}
+	if banner == "thinkertoy" || banner == "standard" || banner == "shadow" {
+		name = banner
+	} else {
+		fmt.Println("incorrect banner")
+		return ""
+	}
 	file := fs.Read_file(name)
 	if file == nil {
 		return ""
@@ -49,8 +51,39 @@ func finalPrint(text string , banner string) string {
 	return finalResult
 }
 
+func handler(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "file.html")
+}
+
+func process(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "POST" {
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+		return
+	}
+
+	err := r.ParseForm()
+	if err != nil {
+		http.Error(w, "Unable to parse form", http.StatusBadRequest)
+		return
+	}
+
+	text := r.FormValue("txt")
+	banner := r.FormValue("banner")
+
+	// Call your processing function
+	result := finalPrint(text, banner)
+	// Display the result on a new page
+	fmt.Fprintf(w, "<h1>Result</h1>")
+	fmt.Fprintf(w, "<p>%s</p>", result)
+	fmt.Fprintf(w, "<a href='/'>Go back</a>")
+}
+
+func Print() string {
+	return "OK"
+}
 
 func main() {
-	v := finalPrint("hamza" , "shadow")
-	//fmt.Println(v)
+	http.HandleFunc("/", handler)
+	http.HandleFunc("/process", process)
+	http.ListenAndServe(":8080", nil)
 }
