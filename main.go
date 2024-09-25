@@ -2,12 +2,59 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"net/http"
-	"os"
 	"strings"
 
 	fs "fs/ascii"
 )
+
+type PageVariables struct {
+	Input  string
+	Result string
+}
+
+var tpl *template.Template
+
+func main() {
+	var err error
+	tpl, err = template.ParseGlob("*.html")
+	if err != nil {
+		panic(err)
+	}
+	http.HandleFunc("/", homePage)
+	http.HandleFunc("/art", processForm)
+	http.ListenAndServe(":8080", nil)
+}
+
+func homePage(w http.ResponseWriter, r *http.Request) {
+	vars := PageVariables{
+		Input:  "",
+		Result: "",
+	}
+	renderTemplate(w, vars)
+}
+
+func processForm(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodPost {
+		r.ParseForm()
+		banner := r.FormValue("banner")
+		input := r.FormValue("text")
+
+		result := finalPrint(input, banner)
+
+		vars := PageVariables{
+			Input:  input,
+			Result: result,
+		}
+		renderTemplate(w, vars)
+	}
+}
+
+func renderTemplate(w http.ResponseWriter, vars PageVariables) {
+	t := template.Must(template.New("webpage").Parse(tpl))
+	t.Execute(w, vars)
+}
 
 func finalPrint(text string, banner string) string {
 	name := ""
@@ -34,56 +81,5 @@ func finalPrint(text string, banner string) string {
 	splitted_line := strings.Split(line, "\\n")
 	splitted_line, lines_count = fs.Cleaned_split(splitted_line, lines_count)
 	finalResult = fs.Print_art(file[1:], splitted_line, lines_count)
-
-	filename := "result.txt"
-	resultFile, err := os.Create(filename)
-	if err != nil {
-		fmt.Println("Error creating a file:", err)
-		return ""
-	}
-	defer resultFile.Close()
-
-	_, err = resultFile.WriteString(finalResult)
-	if err != nil {
-		fmt.Println("Error writing the result")
-		return ""
-	}
 	return finalResult
-}
-
-func handler(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "file.html")
-}
-
-func process(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "POST" {
-		http.Redirect(w, r, "/", http.StatusSeeOther)
-		return
-	}
-
-	err := r.ParseForm()
-	if err != nil {
-		http.Error(w, "Unable to parse form", http.StatusBadRequest)
-		return
-	}
-
-	text := r.FormValue("txt")
-	banner := r.FormValue("banner")
-
-	// Call your processing function
-	result := finalPrint(text, banner)
-	// Display the result on a new page
-	fmt.Fprintf(w, "<h1>Result</h1>")
-	fmt.Fprintf(w, "<p>%s</p>", result)
-	fmt.Fprintf(w, "<a href='/'>Go back</a>")
-}
-
-func Print() string {
-	return "OK"
-}
-
-func main() {
-	http.HandleFunc("/", handler)
-	http.HandleFunc("/process", process)
-	http.ListenAndServe(":8080", nil)
 }
