@@ -23,7 +23,7 @@ func main() {
 		panic(err)
 	}
 
-	// http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
+	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
 
 	http.HandleFunc("/", homePage)
 	http.HandleFunc("/art", processForm)

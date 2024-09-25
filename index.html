@@ -33,7 +33,7 @@
         </div>
       </div>
       <div id="type">
-        <textarea id="textarea" name="text" required>Type text here</textarea>
+        <textarea id="textarea" name="text" placeholder="Type text here"></textarea>
         <input type="submit">
       </div>
       </form>
@@ -43,11 +43,12 @@
       <div id="out_cont">
         <form action="/" method="get">
         <h1>Result</h1>
-        <textarea id="text" readonly>{{.Result}}</textarea>
+        
       </form>
       </div>
    
   </section>
+  <pre>{{.Result}}</pre>
 </body>
 
 </html>
