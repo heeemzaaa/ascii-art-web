@@ -22,6 +22,9 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	// http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
+
 	http.HandleFunc("/", homePage)
 	http.HandleFunc("/art", processForm)
 	http.ListenAndServe(":8080", nil)
@@ -52,8 +55,10 @@ func processForm(w http.ResponseWriter, r *http.Request) {
 }
 
 func renderTemplate(w http.ResponseWriter, vars PageVariables) {
-	t := template.Must(template.New("webpage").Parse(tpl))
-	t.Execute(w, vars)
+	if err := tpl.ExecuteTemplate(w, "index.html", vars); err != nil {
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		fmt.Println("Error executing template:", err)
+	}
 }
 
 func finalPrint(text string, banner string) string {
