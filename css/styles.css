@@ -24,17 +24,31 @@ body {
 }
 
 .output #text {
+    max-width: 400%;
+    max-height: 400px;
+    overflow-y: auto; 
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word; 
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    overflow: auto; 
+    font-family: monospace; 
     margin-left: 3%;
     background-color: #eeeeeeb9;
     color: black;
     width: 95%;
-    height: 20vh;
+    height: 200px;
     font-weight: 400;
     border: 2px solid #A094AB;
     border-radius: 22px 22px;
     padding-left: 10px;
-    padding-top: 10px;
+    padding-top: 70px;
     resize: none;
+    line-height: 1.5;
 }
 
 .input h1 {

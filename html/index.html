@@ -15,7 +15,7 @@
         <h1 id="head">Enter Text</h1>
         <h2>How to use</h2>
         <p id="text_p">
-          Select a banner that for your text and then Type it in Text area and
+          Select a banner for your text and then Type it in Text area and
           click the button
         </p>
       </div>
@@ -34,21 +34,17 @@
       </div>
       <div id="type">
         <textarea id="textarea" name="text" placeholder="Type text here"></textarea>
-        <input type="submit">
-      </div>
+        <button id="button">Done</button>
+            </div>
       </form>
     </div>
   </section>
   <section class="output">
-      <div id="out_cont">
-        <form action="/" method="get">
-        <h1>Result</h1>
-        
-      </form>
-      </div>
-   
+    <div id="out_cont">
+      <h1>Result</h1>
+      <pre id="text">{{.Result}}</pre>
+    </div>
   </section>
-  <pre>{{.Result}}</pre>
 </body>
 
 </html>

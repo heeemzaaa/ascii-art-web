@@ -104,11 +104,41 @@ func Cleaned_split(s []string, lines_count []int) ([]string, []int) {
 	return ret, lines_count
 }
 
-func Is_ascii(s string) bool {
-	for i := 0; i < len(s); i++ {
-		if s[i] < 32 || s[i] > 126 {
-			return false
+func Is_ascii(s string) string {
+	var result string
+	slice := []rune(s)
+	for i := 0; i < len(slice); i++ {
+		if slice[i] == 10 || slice[i] == 13 {
+			result += string(slice[i])
+		} else if slice[i] >= 32 && slice[i] <= 126 {
+			result += string(slice[i])
 		}
 	}
-	return true
+	return result
+}
+
+func FinalPrint(text string, banner string) string {
+	name := ""
+	if banner == "thinkertoy" || banner == "standard" || banner == "shadow" {
+		name = banner
+	} else {
+		fmt.Println("incorrect banner")
+		return ""
+	}
+	file := Read_file(name)
+	if file == nil {
+		return ""
+	}
+	line := text
+	ret := Is_ascii(line)
+
+	if len(line) < 1 {
+		return ""
+	}
+	finalResult := ""
+	lines_count := Count_next_line(ret)
+	splitted_line := strings.Split(ret, "\r\n")
+	splitted_line, lines_count = Cleaned_split(splitted_line, lines_count)
+	finalResult = Print_art(file[1:], splitted_line, lines_count)
+	return finalResult
 }
