@@ -13,8 +13,16 @@ var (
 )
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/" {
+		http.NotFound(w, r)
+		return
+	}
 	Result = ""
-	tpl.ExecuteTemplate(w, "index.html", Result)
+	err := tpl.ExecuteTemplate(w, "index.html", Result)
+	if err != nil {
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
 }
 
 func AsciiHandler(w http.ResponseWriter, r *http.Request) {
@@ -23,11 +31,22 @@ func AsciiHandler(w http.ResponseWriter, r *http.Request) {
 
 		input := r.FormValue("text")
 		banner := r.FormValue("banner")
-
+		
 		result := fs.FinalPrint(input, banner)
 
 		Result = result
-		tpl.ExecuteTemplate(w, "index.html", Result)
+
+		err := tpl.ExecuteTemplate(w, "index.html", Result)
+		if err != nil {
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+			return
+		} else {
+			w.WriteHeader(http.StatusOK)
+		}
+
+	} else {
+		http.Error(w, "Bad Request: Missing input", http.StatusBadRequest)
+		return
 	}
 }
 
@@ -37,8 +56,9 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	http.Handle("/image/", http.StripPrefix("/image/", http.FileServer(http.Dir("image"))))
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
-	http.HandleFunc("/home", HomeHandler)
-	http.HandleFunc("/art", AsciiHandler)
-	http.ListenAndServe(":5050", nil)
+	http.HandleFunc("/", HomeHandler)
+	http.HandleFunc("/ascii-art", AsciiHandler)
+	http.ListenAndServe(":8080", nil)
 }
