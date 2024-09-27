@@ -7,24 +7,14 @@ import (
 	fs "fs/ascii"
 )
 
-type Data struct {
-	Input  string
-	Banner string
-	Result string
-}
-
 var (
-	output Data
 	tpl    *template.Template
+	Result string
 )
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	output = Data{
-		Input:  "",
-		Banner: "",
-		Result: "",
-	}
-	tpl.ExecuteTemplate(w, "index.html", output)
+	Result = ""
+	tpl.ExecuteTemplate(w, "index.html", Result)
 }
 
 func AsciiHandler(w http.ResponseWriter, r *http.Request) {
@@ -36,12 +26,8 @@ func AsciiHandler(w http.ResponseWriter, r *http.Request) {
 
 		result := fs.FinalPrint(input, banner)
 
-		output = Data{
-			Input:  input,
-			Banner: banner,
-			Result: result,
-		}
-		tpl.ExecuteTemplate(w, "index.html", output)
+		Result = result
+		tpl.ExecuteTemplate(w, "index.html", Result)
 	}
 }
 
