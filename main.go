@@ -31,11 +31,10 @@ func AsciiHandler(w http.ResponseWriter, r *http.Request) {
 
 		input := r.FormValue("text")
 		banner := r.FormValue("banner")
-		
+
 		result := fs.FinalPrint(input, banner)
 
 		Result = result
-
 		err := tpl.ExecuteTemplate(w, "index.html", Result)
 		if err != nil {
 			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
