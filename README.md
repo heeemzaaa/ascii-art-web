@@ -21,6 +21,7 @@ Ascii-art-web consists in creating and running a server, in which it will be pos
 ### How to use
 
 1. Run the program:
+   ```bash
    go run main.go
 
 2. Go to the browser:
