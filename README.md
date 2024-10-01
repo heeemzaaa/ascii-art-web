@@ -43,7 +43,7 @@ Ascii-art-web consists in creating and running a server, in which it will be pos
 
 ### Example
 
-1. We insert the input "Hello world !" , after we choose the standard style
+1. We insert the input "Hello world !" , after we choose the standard style, finally we click the button "Done":
    ![My Image](image5.png)
 
 2. We see the result in this area, like this:
