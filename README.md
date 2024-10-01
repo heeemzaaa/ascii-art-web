@@ -41,6 +41,14 @@ Ascii-art-web consists in creating and running a server, in which it will be pos
 7. Finally, you'll see the result here:
    ![My Image](image4.png)
 
+### Example
+
+1. We insert the input "Hello world !" , after we choose the standard style
+   ![My Image](image5.png)
+
+2. We see the result in this area, like this:
+   ![My Image](image6.png)
+
 
 ## Implementation details:
 
