@@ -13,8 +13,8 @@ Ascii-art-web consists in creating and running a server, in which it will be pos
 
 1. Clone the repository:
    ```bash
-   git clone https://learn.zone01oujda.ma/git/helkhawl/ascii-art-web.git
-
+   git clone https://github.com/heeemzaaa/ascii-art-web
+   
 2. Navigate to the project directory:
    cd ascii-art-web/
 
