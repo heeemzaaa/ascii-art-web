@@ -18,12 +18,12 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		http.NotFound(w, r)
 		return
 	}
-	Result = ""
 	err := tpl.ExecuteTemplate(w, "index.html", Result)
 	if err != nil {
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 	}
+	Result = ""
 }
 
 func AsciiHandler(w http.ResponseWriter, r *http.Request) {
@@ -36,16 +36,10 @@ func AsciiHandler(w http.ResponseWriter, r *http.Request) {
 		result := fs.FinalPrint(input, banner)
 
 		Result = result
-		err := tpl.ExecuteTemplate(w, "index.html", Result)
-		if err != nil {
-			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-			return
-		} else {
-			w.WriteHeader(http.StatusOK)
-		}
 
+		http.Redirect(w, r, "/", http.StatusFound)
 	} else {
-		http.Error(w, "Bad Request: Missing input", http.StatusBadRequest)
+		http.NotFound(w, r)
 		return
 	}
 }

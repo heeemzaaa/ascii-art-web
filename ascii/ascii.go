@@ -85,6 +85,7 @@ func PrintAscii(slice []string, file []string) string {
 			}
 		}
 	}
+	result = result[:len(result)-1]
 	return result
 }
 
