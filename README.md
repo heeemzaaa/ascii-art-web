@@ -30,24 +30,24 @@ Ascii-art-web consists in creating and running a server, in which it will be pos
    localhost:8080/
 
 4. This is what you're going to see:
-   ![My Image](image1.png)
+   ![My Image](images/image1.png)
 
 5. Choose a banner here,this made you text stylized:
-   ![My Image](image2.png)
+   ![My Image](images/image2.png)
 
 6. Type your text here , then click done:
-   ![My Image](image3.png)
+   ![My Image](images/image3.png)
 
 7. Finally, you'll see the result here:
-   ![My Image](image4.png)
+   ![My Image](images/image4.png)
 
 ### Example
 
 1. We insert the input "Hello world !" , after we choose the standard style, finally we click the button "Done":
-   ![My Image](image5.png)
+   ![My Image](images/image5.png)
 
 2. We see the result in this area, like this:
-   ![My Image](image6.png)
+   ![My Image](images/image6.png)
 
 
 ## Implementation details:
