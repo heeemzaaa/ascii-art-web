@@ -32,7 +32,7 @@ Ascii-art-web consists in creating and running a server, in which it will be pos
 4. This is what you're going to see:
    ![My Image](image1.png)
 
-5. Choose a banner here:
+5. Choose a banner here,this made you text stylized:
    ![My Image](image2.png)
 
 6. Type your text here , then click done:
