@@ -81,9 +81,12 @@ func PrintAscii(slice []string, file []string) string {
 					holder = (int(slice[i][k])-32)*9 + j
 					result += file[holder]
 				}
-				result += "\n"
+				result += "\r\n"
 			}
 		}
+	}
+	if slice[0] == "" {
+		result = "\r\n" + result
 	}
 	result = result[:len(result)-1]
 	return result
@@ -107,12 +110,11 @@ func FinalPrint(text string, banner string) string {
 	if banner == "thinkertoy" || banner == "standard" || banner == "shadow" {
 		name = banner
 	} else {
-		fmt.Println("incorrect banner")
-		return ""
+		return "incorrect banner"
 	}
 	file := Read_file(name)
 	if file == nil {
-		return ""
+		return "error in the file"
 	}
 	line := text
 	ret := Is_ascii(line)

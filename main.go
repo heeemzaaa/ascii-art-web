@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -23,6 +24,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 	}
+
 	Result = ""
 }
 
@@ -33,13 +35,27 @@ func AsciiHandler(w http.ResponseWriter, r *http.Request) {
 		input := r.FormValue("text")
 		banner := r.FormValue("banner")
 
+		if len(input) >= 1000 {
+			http.Error(w, "Bad request", http.StatusBadRequest)
+			return
+		}
+
 		result := fs.FinalPrint(input, banner)
 
 		Result = result
 
+		if len(Result) == 0 || Result == "incorrect banner" {
+			http.Error(w, "Bad request", http.StatusBadRequest)
+			return
+		}
+
+		if Result == "error in the file" {
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+			return
+		}
 		http.Redirect(w, r, "/", http.StatusFound)
 	} else {
-		http.NotFound(w, r)
+		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
 }
@@ -50,9 +66,9 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	http.Handle("/image/", http.StripPrefix("/image/", http.FileServer(http.Dir("image"))))
-	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
+	//http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
 	http.HandleFunc("/", HomeHandler)
 	http.HandleFunc("/ascii-art", AsciiHandler)
+	fmt.Println("http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
