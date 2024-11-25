@@ -6,6 +6,7 @@ import (
 	fs "fs/internal/ascii"
 )
 
+// this function handles the request from the client and return a response
 func AsciiHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodPost {
 		r.ParseForm()

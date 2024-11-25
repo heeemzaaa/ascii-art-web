@@ -2,6 +2,7 @@ package fs
 
 import "net/http"
 
+// this function represents the home page after running the server
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
 		http.NotFound(w, r)

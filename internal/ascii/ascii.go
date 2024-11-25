@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+// this function reads the files and return its content as a slice of string
 func Read_file(s string) []string {
 	file, err := os.ReadFile("../internal/art/" + s + ".txt")
 	if err != nil {
@@ -19,6 +20,7 @@ func Read_file(s string) []string {
 	return ret
 }
 
+// this function checks if the empty string is in the middle
 func Middle(slice []string) bool {
 	before := false
 	after := false
@@ -52,6 +54,7 @@ func Middle(slice []string) bool {
 	return middle
 }
 
+// this function cleans the slice to return it to the main function to applt the logic of ascii art
 func CleanSlice(slice []string) []string {
 	check := true
 	for i := 0; i < len(slice); i++ {
@@ -69,6 +72,7 @@ func CleanSlice(slice []string) []string {
 	return slice
 }
 
+// this function apllies the main logic of ascii art
 func PrintAscii(slice []string, file []string) string {
 	result := ""
 	holder := 0
@@ -92,6 +96,7 @@ func PrintAscii(slice []string, file []string) string {
 	return result
 }
 
+// this function returns a string have only the ascii art character
 func Is_ascii(s string) string {
 	var result string
 	slice := []rune(s)
@@ -105,6 +110,7 @@ func Is_ascii(s string) string {
 	return result
 }
 
+// this fucntion take the text and the banner and apllies the main logic
 func FinalPrint(text string, banner string) string {
 	name := ""
 	if banner == "thinkertoy" || banner == "standard" || banner == "shadow" {
