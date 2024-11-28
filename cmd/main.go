@@ -15,7 +15,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	http.Handle("/static/css/", http.StripPrefix("/static/css/", http.FileServer(http.Dir("../static/css"))))
+	http.HandleFunc("/my-css", h.CssHandler)
 	http.HandleFunc("/", h.HomeHandler)
 	http.HandleFunc("/ascii-art", h.AsciiHandler)
 	fmt.Println("http://localhost:8080")
