@@ -7,3 +7,8 @@ var (
 	Tpl    *template.Template
 	Result string
 )
+
+type ErrorData struct {
+	StatusCode int
+	Message    string
+}

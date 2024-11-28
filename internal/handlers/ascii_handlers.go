@@ -15,7 +15,7 @@ func AsciiHandler(w http.ResponseWriter, r *http.Request) {
 		banner := r.FormValue("banner")
 
 		if len(input) >= 1000 {
-			http.Error(w, "Bad request", http.StatusBadRequest)
+			ErrorPage(w, http.StatusBadRequest, "Bad request !")
 			return
 		}
 
@@ -24,17 +24,17 @@ func AsciiHandler(w http.ResponseWriter, r *http.Request) {
 		Result = result
 
 		if len(Result) == 0 || Result == "incorrect banner" {
-			http.Error(w, "Bad request", http.StatusBadRequest)
+			ErrorPage(w, http.StatusBadRequest, "Bad request !")
 			return
 		}
 
 		if Result == "error in the file" {
-			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+			ErrorPage(w, http.StatusInternalServerError, "Internal server error !")
 			return
 		}
 		http.Redirect(w, r, "/", http.StatusFound)
 	} else {
-		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
+		ErrorPage(w, http.StatusMethodNotAllowed, "Method not allowed !")
 		return
 	}
 }

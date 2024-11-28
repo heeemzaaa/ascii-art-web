@@ -4,10 +4,6 @@ import (
 	"net/http"
 )
 
-type ErrorData struct {
-	StatusCode int
-	Message    string
-}
 
 func ErrorPage(w http.ResponseWriter, statusCode int, message string) {
 	w.WriteHeader(statusCode)
