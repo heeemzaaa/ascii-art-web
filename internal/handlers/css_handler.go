@@ -3,21 +3,27 @@ package fs
 import (
 	"net/http"
 	"os"
+	"strings"
 )
 
-func CssHandler(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/my-css" {
-		http.Error(w, "403 Forbidden", http.StatusForbidden)
+func HandleAssets(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		ErrorPage(w, http.StatusMethodNotAllowed, "Method not allowed !")
 		return
 	}
-
-	cssBytes, err := os.ReadFile("../static/css/styles.css")
-	if err != nil {
-		http.Error(w, "Error reading CSS file", http.StatusInternalServerError)
+	if !strings.HasPrefix(r.URL.Path, "/static") {
+		ErrorPage(w, http.StatusNotFound, "Statut not found !")
 		return
+	} else {
+		infos, err := os.Stat(r.URL.Path[1:])
+		if err != nil {
+			ErrorPage(w, http.StatusNotFound, "Statut not found !")
+			return
+		} else if infos.IsDir() {
+			ErrorPage(w, http.StatusForbidden, "Access Forbidden !")
+			return
+		} else {
+			http.ServeFile(w, r, r.URL.Path[1:])
+		}
 	}
-
-	w.Header().Set("Content-Type", "text/css")
-
-	w.Write(cssBytes)
 }

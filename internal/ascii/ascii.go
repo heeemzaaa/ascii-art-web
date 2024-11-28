@@ -8,7 +8,7 @@ import (
 
 // this function reads the files and return its content as a slice of string
 func Read_file(s string) []string {
-	file, err := os.ReadFile("../internal/art/" + s + ".txt")
+	file, err := os.ReadFile("internal/art/" + s + ".txt")
 	if err != nil {
 		fmt.Println("Ascii file not found")
 		return nil

@@ -11,13 +11,13 @@ import (
 
 func main() {
 	var err error
-	h.Tpl, err = template.ParseFiles("../template/index.html")
+	h.Tpl, err = template.ParseGlob("template/*.html")
 	if err != nil {
 		panic(err)
 	}
-	http.HandleFunc("/my-css", h.CssHandler)
+	http.HandleFunc("/static/", h.HandleAssets)
 	http.HandleFunc("/", h.HomeHandler)
 	http.HandleFunc("/ascii-art", h.AsciiHandler)
-	fmt.Println("http://localhost:8080")
+	fmt.Println("Server listening at: http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
