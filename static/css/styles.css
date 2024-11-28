@@ -11,7 +11,7 @@ body {
 }
 
 .output h1 {
-    padding-left: 43.2%;
+    text-align: center;
     padding-top: 4vh;
     font-size: 10vh;
     margin-bottom: 1%;
@@ -119,4 +119,224 @@ body {
     display: flex;
     margin-left: 25vh;
     margin-top: 10vh;
+}
+
+@media (min-width: 300px) and (max-width: 400px) {
+    .input #text_p {
+        font-size: 4.5vw;
+        padding-top: 3vh;
+    }
+    .input h1 {
+        font-size: 8vh;
+        padding-top: 5vh;
+    }
+    .input h2 {
+        font-size: 4vh;
+    }
+    .input #box {
+        padding-left: 10%;
+        padding-top: 2%;
+    }
+    
+    .input #select_div {
+        display: flex;
+    }
+    
+    .input #options {
+        margin-left: 0.5vh;
+        padding-left: 0.5vh;
+        margin-top: 1vh;
+    }
+    .input #textarea {
+        width: 80vw;
+        height: 20vh;
+        font-weight: 400;
+        border-radius: 22px 22px;
+        padding-left: 10px;
+        padding-top: 10px;
+    }
+    .input #type {
+        display: grid;
+        margin: 5px;
+        margin-top: 2vh;
+        margin-left: 10vw;
+    }
+    .input p {
+        font-size: 6vw;
+        padding-top: 1.5vh;
+    }
+    .input #button {
+        width: 79vw;
+        margin-left: 0.5vh;
+    }
+    .output h1 {
+        font-size: 8vh;
+        padding-top: 5vh;
+    }
+}
+
+@media (min-width: 500px) and (max-width: 600px) {
+    .input h1 {
+        font-size: 8vh;
+        padding-top: 5vh;
+    }
+    .input h2 {
+        font-size: 4vh;
+    }
+    .input #text_p {
+        font-size: 3vw;
+        padding-left: 10px;
+    }
+    .input #box {
+        padding-left: 16%;
+        padding-top: 2%;
+    }
+    
+    .input #select_div {
+        display: flex;
+    }
+    
+    .input #options {
+        margin-left: 0.5vh;
+        padding-left: 0.5vh;
+        margin-top: 1vh;
+    }
+    .input #textarea {
+        width: 80vw;
+        height: 20vh;
+        font-weight: 400;
+        border-radius: 22px 22px;
+        padding-left: 10px;
+        padding-top: 10px;
+    }
+    .input #type {
+        display: grid;
+        margin: 5px;
+        margin-top: 5vh;
+        margin-left: 10vw;
+    }
+    .input p {
+        font-size: 3.5vh;
+        padding-top: 1.5vh;
+    }
+    .input #button {
+        width: 79vw;
+        margin-left: 0.5vh;
+    }
+    .output h1 {
+        font-size: 8vh;
+        padding-top: 5vh;
+    }
+}
+@media (min-width:700px) and (max-width: 900px) {
+    .input h1 {
+        font-size: 8vh;
+        padding-top: 5vh;
+    }
+    .input h2 {
+        font-size: 2vh;
+    }
+    .input #text_p {
+        font-size: 3vw;
+        padding-left: 10px;
+    }
+    .input #box {
+        padding-left: 25%;
+        padding-top: 2%;
+    }
+    
+    .input #select_div {
+        display: flex;
+    }
+    
+    .input #options {
+        margin-left: 0.5vh;
+        padding-left: 0.5vh;    
+    }
+    .input #textarea {
+        width: 80vw;
+        height: 20vh;
+        font-weight: 400;
+        border-radius: 22px 22px;
+        padding-left: 10px;
+        padding-top: 10px;
+    }
+    .input #type {
+        display: grid;
+        margin: 5px;
+        margin-top: 5vh;
+        margin-left: 10vw;
+    }
+    .input p {
+        font-size: 4vh;
+    }
+    .input #button {
+        width: 79vw;
+        margin-left: 0.5vh;
+    }
+    .output h1 {
+        font-size: 8vh;
+        padding-top: 5vh;
+    }
+}
+
+@media (min-width:900px) and(max-width: 1400px) {
+    .input h1 {
+        font-size: 8vh;
+        padding-top: 5vh;
+    }
+    .input h2 {
+        font-size: 5vh;
+    }
+    .input #text_p {
+        font-size: 3vw;
+        padding-left: 10px;
+    }
+    .input #box {
+        padding-left: 30%;
+        padding-top: 2%;
+    }
+    
+    .input #select_div {
+        display: flex;
+    }
+    
+    .input #options {
+        margin-left: 0.5vh;
+        padding-left: 0.5vh;    
+    }
+    .input #textarea {
+        width: 80vw;
+        height: 20vh;
+        font-weight: 400;
+        border-radius: 22px 22px;
+        padding-left: 10px;
+        padding-top: 10px;
+    }
+    .input #type {
+        display: grid;
+        margin: 5px;
+        margin-top: 5vh;
+        margin-left: 10vw;
+    }
+    .input p {
+        font-size: 4.5vh;
+    }
+    .input #button {
+        width: 79vw;
+        margin-left: 0.5vh;
+    }
+    .output h1 {
+        font-size: 8vh;
+        padding-top: 5vh;
+    }
+}
+
+@media (min-width:1500px) and (max-width: 1601px) {
+    .input #type {
+        margin-left: 18vw;
+    }
+    .output #out_cont > #text {
+        max-width: 85%;
+    }
 }
