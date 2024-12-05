@@ -1,9 +1,9 @@
 package fs
 
 import (
+	"fmt"
 	"net/http"
 )
-
 
 func ErrorPage(w http.ResponseWriter, statusCode int, message string) {
 	w.WriteHeader(statusCode)
@@ -11,5 +11,10 @@ func ErrorPage(w http.ResponseWriter, statusCode int, message string) {
 		StatusCode: statusCode,
 		Message:    message,
 	}
-	Tpl.ExecuteTemplate(w, "error.html", data)
+
+	err := Tpl.ExecuteTemplate(w, "error.html", data)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 }

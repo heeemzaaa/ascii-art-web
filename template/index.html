@@ -23,18 +23,19 @@
       <div id="box">
         <div id="select">
           <div id="select_div">
-            <p>Choose your banner</p>
+            <p id="banner_selection">Choose your banner</p>
             <form action="/ascii-art" method="post">
               <select id="options" name="banner">
-                <option value="standard" selected>standard</option>
-                <option value="shadow">Shadow</option>
-                <option value="thinkertoy">Thinkertoy</option>
+                <option value="standard" {{if eq .Banner "standard" }}selected{{end}}>standard</option>
+                <option value="shadow" {{if eq .Banner "shadow" }}selected{{end}}>shadow</option>
+                <option value="thinkertoy" {{if eq .Banner "thinkertoy" }}selected{{end}}>thinkertoy</option>
+
               </select>
           </div>
         </div>
       </div>
       <div id="type">
-        <textarea id="textarea" name="text" placeholder="Type text here" required></textarea>
+        <textarea id="textarea" name="text" placeholder="Type text here" required>{{.Input}}</textarea>
         <button id="button">Done</button>
       </div>
       </form>
@@ -44,7 +45,7 @@
     <div id="out_cont">
       <h1>Result</h1>
       <div id="text">
-        <pre>{{.}}</pre>
+        <pre>{{.Result}}</pre>
       </div>
     </div>
   </section>

@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func HandleAssets(w http.ResponseWriter, r *http.Request) {
+func HandleStatic(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		ErrorPage(w, http.StatusMethodNotAllowed, "Method not allowed !")
 		return

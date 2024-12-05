@@ -18,17 +18,20 @@ func AsciiHandler(w http.ResponseWriter, r *http.Request) {
 			ErrorPage(w, http.StatusBadRequest, "Bad request !")
 			return
 		}
-
+		
 		result := fs.FinalPrint(input, banner)
+		D.Input = "\r\n" + input
+		D.Banner = banner
+		D.Result = result
 
-		Result = result
-
-		if len(Result) == 0 || Result == "incorrect banner" {
+		if len(D.Result) == 0 || D.Result == "incorrect banner" || D.Result == "ascii error !" {
+			D.Result = ""
 			ErrorPage(w, http.StatusBadRequest, "Bad request !")
 			return
 		}
 
-		if Result == "error in the file" {
+		if D.Result == "error in the file" {
+			D.Result = ""
 			ErrorPage(w, http.StatusInternalServerError, "Internal server error !")
 			return
 		}

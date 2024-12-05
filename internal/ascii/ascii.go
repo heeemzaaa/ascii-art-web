@@ -17,6 +17,10 @@ func Read_file(s string) []string {
 	for i := 0; i < len(ret) && s == "thinkertoy"; i++ {
 		ret[i] = strings.ReplaceAll(ret[i], "\r", "")
 	}
+	if len(ret) != 856 {
+		fmt.Println("Ascii file not found")
+		return nil
+	}
 	return ret
 }
 
@@ -105,6 +109,8 @@ func Is_ascii(s string) string {
 			result += string(slice[i])
 		} else if slice[i] >= 32 && slice[i] <= 126 {
 			result += string(slice[i])
+		} else {
+			result = "Non ascii character !"
 		}
 	}
 	return result
@@ -124,6 +130,9 @@ func FinalPrint(text string, banner string) string {
 	}
 	line := text
 	ret := Is_ascii(line)
+	if ret == "Non ascii character !" {
+		return "ascii error !"
+	}
 	if len(line) < 1 {
 		return ""
 	}

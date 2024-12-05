@@ -1,6 +1,8 @@
 package fs
 
-import "net/http"
+import (
+	"net/http"
+)
 
 // this function represents the home page after running the server
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
@@ -8,11 +10,11 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		ErrorPage(w, 404, "Page not found !")
 		return
 	}
-	err := Tpl.ExecuteTemplate(w, "index.html", Result)
+	err := Tpl.ExecuteTemplate(w, "index.html", D)
 	if err != nil {
 		ErrorPage(w, http.StatusInternalServerError, "Internal server error !")
 		return
 	}
 
-	Result = ""
+	D.Result = ""
 }

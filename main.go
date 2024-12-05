@@ -15,7 +15,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	http.HandleFunc("/static/", h.HandleAssets)
+	http.HandleFunc("/static/", h.HandleStatic)
 	http.HandleFunc("/", h.HomeHandler)
 	http.HandleFunc("/ascii-art", h.AsciiHandler)
 	fmt.Println("Server listening at: http://localhost:8080")
