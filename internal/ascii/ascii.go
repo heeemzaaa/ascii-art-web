@@ -10,7 +10,7 @@ import (
 func Read_file(s string) []string {
 	file, err := os.ReadFile("internal/art/" + s + ".txt")
 	if err != nil {
-		fmt.Println("Ascii file not found")
+		fmt.Println("Error in the file !")
 		return nil
 	}
 	ret := strings.Split(string(file), "\n")
@@ -18,13 +18,13 @@ func Read_file(s string) []string {
 		ret[i] = strings.ReplaceAll(ret[i], "\r", "")
 	}
 	if len(ret) != 856 {
-		fmt.Println("Ascii file not found")
+		fmt.Println("Error in the file !")
 		return nil
 	}
 	return ret
 }
 
-// this function checks if the empty string is in the middle
+// Checks if there is an empty string in the middle of a slice, surrounded by non-empty strings.
 func Middle(slice []string) bool {
 	before := false
 	after := false
@@ -58,7 +58,7 @@ func Middle(slice []string) bool {
 	return middle
 }
 
-// this function cleans the slice to return it to the main function to applt the logic of ascii art
+// this function cleans the slice to return it to the main function to apply the logic of ascii art
 func CleanSlice(slice []string) []string {
 	check := true
 	for i := 0; i < len(slice); i++ {
@@ -110,7 +110,7 @@ func Is_ascii(s string) string {
 		} else if slice[i] >= 32 && slice[i] <= 126 {
 			result += string(slice[i])
 		} else {
-			result = "Non ascii character !"
+			return "Non ascii character !"
 		}
 	}
 	return result
@@ -128,12 +128,11 @@ func FinalPrint(text string, banner string) string {
 	if file == nil {
 		return "error in the file"
 	}
-	line := text
-	ret := Is_ascii(line)
+	ret := Is_ascii(text)
 	if ret == "Non ascii character !" {
 		return "ascii error !"
 	}
-	if len(line) < 1 {
+	if len(text) < 1 {
 		return ""
 	}
 	finalResult := ""
